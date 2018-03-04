@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/ixnp/08-REST/issues"
   },
-  "homepage": "https://github.com/ixnp/08-REST#readme"
+  "homepage": "https://github.com/ixnp/08-REST#readme",
+  "dependencies": {
+    "uuidv4": "^1.0.0"
+  }
 }
