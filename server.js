@@ -1,22 +1,23 @@
-'use strict'
+"use strict";
 const http = require('http');
-const url = require('url');
-const querystring = require('querystring');
-const Senshi = require('./models/senshi.js');
+const Router = require('./lib/router');
+const simpleAPI = require('./api/simple.js');
+const senshiAPI = require('./api/senshiAPI.js');
+
+const router = new Router();
+router.get('/text', simpleAPI.textTest);
+router.get('/json', simpleAPI.stringJson);
+
+router.get('/senshi', senshiAPI.getOneSenshi);
+router.post('/senshi', senshiAPI.postSenshi);
+router.put('/senshi', senshiAPI.putSenshi);
+router.delete('/senshi', senshiAPI.destorySenshi);
+
+const server = http.createServer((req, res) => {
+  return router.tryRoute(req, res);
+});
 
 const PORT = 3000 || process.env;
-const Router = require('./lib/Router.js');
-const firstRouter = require('./lib/ericFristrouter.js');
-//test data//
-const senshi = [new Senshi('SailorMoon','Usagi Tsukino','Lunar Magic')];
-
-
-//
-const server = http.createServer(firstRouter);
-
-
-server.listen(PORT,()=>{
-    console.log('http://localhost:'+ PORT);
-
-})
-
+server.listen(PORT, () => {
+  console.log('http://localhost:' + PORT);
+});

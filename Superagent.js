@@ -5,12 +5,16 @@ let SailorMoon = {
   last: " Michiru Kaioh",
   age: "Water Magic/Beauty" 
 }
+
+let getSailorMoon = {
+    
+}
 const url = 'http://localhost:3000';
-function getReq(){
-    return superagent.get(`${url}`)
+function getReq(path){
+    return superagent.get(`${url}`+ path)
     .end((err, res) => {
         if(err) return console.error("GET ERROR: ", err.message);
-        console.log('GET RES BODY: ', res.body);  
+        console.log('GET RES BODY: ', res);  
         console.log('GET RESPONSE: ', res.status);
     });
 }
@@ -53,4 +57,4 @@ function postReq(obj={}) {
 // delReq();
 /// then call it down here // postReq(testdata);
 postReq(SailorMoon);
-getReq(SailorMoon)
+getReq(getSailorMoon);
